@@ -44,7 +44,7 @@ That's it. The widget fetches data from the ChemFYI API and renders with full st
 | `data-chemfyi` | entity, compare, glossary, guide, search, [tools] | required | Widget type |
 | `data-slug` | e.g. "elements" | — | Entity slug from the ChemFYI database |
 | `data-theme` | light, dark, sepia, auto | light | Visual theme (`auto` follows OS preference) |
-| `data-style` | modern, technical | modern | Widget design style |
+| `data-styleVariant` | modern, technical | modern | Widget design style |
 | `data-size` | default, compact, large | default | Widget size |
 | `data-placeholder` | any string | "Search Elements..." | Search box placeholder |
 
@@ -68,10 +68,10 @@ That's it. The widget fetches data from the ChemFYI API and renders with full st
 
 ```html
 <!-- Modern (default) — clean lines, rounded corners, accent gradients -->
-<div data-chemfyi="entity" data-slug="elements" data-style="modern"></div>
+<div data-chemfyi="entity" data-slug="elements" data-styleVariant="modern"></div>
 
 <!-- Technical — monospace type, grid overlays, laboratory aesthetic -->
-<div data-chemfyi="entity" data-slug="elements" data-style="technical"></div>
+<div data-chemfyi="entity" data-slug="elements" data-styleVariant="technical"></div>
 ```
 
 ## Web Components (Custom Elements)

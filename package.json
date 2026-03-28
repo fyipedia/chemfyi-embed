@@ -1,7 +1,7 @@
 {
   "name": "chemfyi-embed",
-  "version": "1.0.1",
-  "description": "Embed ChemFYI chemistry widgets \u2014 element cards, formula renderer, phase badges. Zero dependencies, Shadow DOM, 4 themes.",
+  "version": "1.1.0",
+  "description": "Embed ChemFYI chemistry widgets — element cards, formula renderer, phase badges. Zero dependencies, Shadow DOM, 4 themes.",
   "main": "dist/embed.min.js",
   "module": "dist/embed.esm.js",
   "types": "dist/index.d.ts",
