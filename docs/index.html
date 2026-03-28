@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChemFYI Embed Widget — Elements Widgets for Any Website</title>
+  <meta name="description" content="Embed ChemFYI Elements widgets on any website. Zero dependencies, Shadow DOM, 4 themes, 2 styles. Free CDN via jsDelivr.">
+  <meta name="theme-color" content="#059669">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ChemFYI Embed Widget — Elements for Any Website">
+  <meta property="og:description" content="Add ChemFYI widgets, glossary terms, interactive tools, and inline elements to any website in one line of HTML.">
+  <meta property="og:url" content="https://widget.chemfyi.com">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://chemfyi.com/static/og/homepage.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="ChemFYI">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChemFYI Embed Widget">
+  <meta name="twitter:description" content="Add ChemFYI Elements widgets to any website in one line of HTML. Zero dependencies, Shadow DOM.">
+  <meta name="twitter:image" content="https://chemfyi.com/static/og/homepage.png">
+
+  <!-- Canonical + SEO -->
+  <link rel="canonical" href="https://widget.chemfyi.com">
+  <meta name="author" content="FYIPedia">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://chemfyi.com/static/favicon.ico" sizes="32x32">
+  <link rel="icon" href="https://chemfyi.com/static/icon.svg" type="image/svg+xml">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://chemfyi.com">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"ChemFYI Embed Widget","url":"https://widget.chemfyi.com","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Embed ChemFYI Elements widgets on any website. Zero dependencies, Shadow DOM isolation.","publisher":{"@type":"Organization","name":"FYIPedia","url":"https://fyipedia.com"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ChemFYI","item":"https://chemfyi.com"},{"@type":"ListItem","position":2,"name":"Widget Docs"}]},{"@type":"SoftwareSourceCode","name":"chemfyi-embed","codeRepository":"https://github.com/fyipedia/chemfyi-embed","programmingLanguage":"TypeScript","runtimePlatform":"Browser","license":"https://opensource.org/licenses/MIT"}]}
+  </script>
+
+  <!-- JetBrains Mono for code blocks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { accent: '#059669' },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', '"Fira Code"', 'ui-monospace', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Dark mode FOUC prevention -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <!-- Alpine.js CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+
+  <!-- Embed script via jsDelivr -->
+  <script src="https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"></script>
+
+  <style>
+    [x-cloak]{display:none!important}
+    :root{--accent:#059669} .accent-text{color:var(--accent)} .accent-bg{background-color:var(--accent)} .accent-border{border-color:var(--accent)}
+    pre{tab-size:2;margin:0}
+    .code-block-wrapper{position:relative;margin-bottom:1rem}
+    .code-lang-badge{position:absolute;top:0;left:12px;transform:translateY(-50%);background:#1e293b;color:#94a3b8;font-family:'JetBrains Mono','Fira Code',monospace;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;z-index:1}
+    .code-copy-btn{position:absolute;top:8px;right:8px;background:#334155;color:#94a3b8;border:none;padding:4px 10px;border-radius:4px;font-size:11px;font-family:'JetBrains Mono','Fira Code',monospace;cursor:pointer;transition:background .15s;z-index:1}
+    .code-copy-btn:hover{background:#475569}
+    .code-block{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.25rem 1.25rem 1rem;font-size:13px;line-height:1.7;overflow-x:auto;font-family:'JetBrains Mono','Fira Code',ui-monospace,monospace;-webkit-font-smoothing:antialiased}
+    .hl-tag{color:#7dd3fc} .hl-attr{color:#86efac} .hl-val{color:#fde68a} .hl-comment{color:#475569;font-style:italic} .hl-str{color:#fda4af} .hl-kw{color:#c4b5fd} .hl-num{color:#fdba74} .hl-fn{color:#67e8f9} .hl-punct{color:#94a3b8}
+    .ws-btn{padding:6px 14px;border-radius:9999px;font-size:12px;font-weight:500;border:1px solid #e2e8f0;background:#fff;color:#64748b;cursor:pointer;transition:all .15s;font-family:'JetBrains Mono','Fira Code',monospace}
+    .ws-btn:hover{border-color:#cbd5e1;color:#334155}
+    .ws-btn.active{background:#059669;color:#fff;border-color:#059669}
+    .dark .ws-btn{background:#1e293b;border-color:#334151;color:#94a3b8}
+    .dark .ws-btn:hover{border-color:#4b5563;color:#e2e8f0}
+    .dark .ws-btn.active{background:#059669;color:#fff;border-color:#059669}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100" x-data="{ mobileMenuOpen: false }">
+
+  <!-- HEADER -->
+  <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <a href="https://chemfyi.com" class="flex items-center gap-2 font-bold text-lg" style="color: #059669">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        <span>ChemFYI</span>
+        <span class="text-xs font-normal text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full font-sans">Embed</span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
+        <a href="#quick-start" class="hover:text-slate-900 dark:hover:text-slate-100">Quick Start</a>
+        <a href="#widgets" class="hover:text-slate-900 dark:hover:text-slate-100">Widgets</a>
+        <a href="#options" class="hover:text-slate-900 dark:hover:text-slate-100">Options</a>
+        <a href="#styles" class="hover:text-slate-900 dark:hover:text-slate-100">Styles</a>
+        <a href="#cdn" class="hover:text-slate-900 dark:hover:text-slate-100">CDN</a>
+        <!-- Dark mode toggle -->
+        <button x-data="{ dark: document.documentElement.classList.contains('dark') }"
+                @click="dark = !dark; localStorage.setItem('theme', dark ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', dark)"
+                class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400" aria-label="Toggle dark mode">
+          <svg x-show="!dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          <svg x-show="dark" x-cloak class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </button>
+        <a href="https://chemfyi.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-md text-white text-sm font-medium" style="background: #059669">Visit ChemFYI &rarr;</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 text-sm font-medium px-3 py-1 rounded-full mb-6 font-mono" style="background: color-mix(in srgb, #059669 10%, white); color: #059669">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Zero Dependencies &middot; Shadow DOM &middot; 4 Themes
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white leading-tight mb-4">
+          Embed <span style="color: #059669">Elements</span><br>on Any Website
+        </h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+          Add ChemFYI entity cards, comparison tables, glossary terms, interactive tools, and inline elements to any website with a single line of HTML. No build tools. No dependencies. Live data from the ChemFYI database.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-8">
+          <a href="#quick-start" class="px-5 py-2.5 rounded-lg text-white font-medium text-sm" style="background: #059669">Get Started</a>
+          <a href="https://github.com/fyipedia/chemfyi-embed" target="_blank" rel="noopener" class="px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700">GitHub &rarr;</a>
+          <a href="https://www.npmjs.com/package/chemfyi-embed" target="_blank" rel="noopener" class="px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700">npm &rarr;</a>
+        </div>
+        <div class="code-block-wrapper" x-data="{ copied: false }">
+          <div class="code-lang-badge">HTML</div>
+          <button @click="navigator.clipboard?.writeText($refs.heroCode.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="code-copy-btn" x-text="copied ? '&#10003;' : 'Copy'"></button>
+          <div class="code-block text-xs sm:text-sm" x-ref="heroCode"><span class="hl-comment">&lt;!-- 1. Place the widget div --&gt;</span><br><span class="hl-tag">&lt;div</span> <span class="hl-attr">data-chemfyi</span>=<span class="hl-val">"entity"</span> <span class="hl-attr">data-slug</span>=<span class="hl-val">"elements"</span><span class="hl-tag">&gt;&lt;/div&gt;</span><br><br><span class="hl-comment">&lt;!-- 2. Add the script once --&gt;</span><br><span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></div>
+        </div>
+      </div>
+      <!-- Hero mock widget preview -->
+      <div class="flex justify-center">
+        <div class="w-full max-w-sm">
+          <p class="text-xs text-slate-400 text-center uppercase tracking-wider font-medium mb-3">Entity Card Preview</p>
+          <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden bg-white dark:bg-slate-900 shadow-sm">
+            <div class="h-1.5" style="background:#059669"></div>
+            <div class="p-4">
+              <div class="flex items-center justify-between mb-2">
+                <div>
+                  <span class="font-bold text-sm text-slate-900 dark:text-white">Elements</span>
+                  <span class="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold" style="background: color-mix(in srgb, #059669 12%, white); color: #059669">Live Data</span>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+              </div>
+              <div class="space-y-1.5 text-xs mb-3">
+                <div class="flex justify-between"><span class="text-slate-400">Type</span><span class="font-medium text-slate-700 dark:text-slate-300">Entity Detail</span></div>
+                <div class="flex justify-between"><span class="text-slate-400">Style</span><span class="font-medium text-slate-700 dark:text-slate-300" style="color:#059669">Modern</span></div>
+                <div class="flex justify-between"><span class="text-slate-400">Theme</span><span class="font-medium text-slate-700 dark:text-slate-300">Light</span></div>
+                <div class="flex justify-between"><span class="text-slate-400">Data</span><span class="font-medium text-slate-700 dark:text-slate-300">Live API</span></div>
+              </div>
+              <div style="font-size:9px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:8px">
+                <a href="https://chemfyi.com" style="color:#059669;text-decoration:none" target="_blank" rel="noopener">Powered by ChemFYI</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK START -->
+  <section id="quick-start" class="py-16 sm:py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">Quick Start</h2>
+        <p class="text-slate-600 dark:text-slate-400">Two lines of HTML. That's all it takes.</p>
+      </div>
+      <div class="max-w-3xl mx-auto">
+        <div class="code-block-wrapper" x-data="{ copied: false }">
+          <div class="code-lang-badge">HTML</div>
+          <script type="text/plain" id="quick-start-snippet"><!-- Place widget divs -->
+<div data-chemfyi="entity" data-slug="elements" data-theme="light"></div>
+<div data-chemfyi="compare" data-slugs="item-a,item-b"></div>
+<div data-chemfyi="search" data-placeholder="Search Elements..."></div>
+
+<!-- Load script once -->
+<script src="https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"></script></script>
+          <button @click="navigator.clipboard?.writeText(document.getElementById('quick-start-snippet').textContent); copied = true; setTimeout(() => copied = false, 2000)" class="code-copy-btn" x-text="copied ? '&#10003; Copied!' : 'Copy'"></button>
+          <div class="code-block text-sm leading-relaxed">
+<span class="hl-comment">&lt;!-- Step 1: Place widget divs anywhere on your page --&gt;</span><br>
+<span class="hl-tag">&lt;div</span> <span class="hl-attr">data-chemfyi</span>=<span class="hl-val">"entity"</span> <span class="hl-attr">data-slug</span>=<span class="hl-val">"elements"</span> <span class="hl-attr">data-theme</span>=<span class="hl-val">"light"</span><span class="hl-tag">&gt;&lt;/div&gt;</span><br>
+<span class="hl-tag">&lt;div</span> <span class="hl-attr">data-chemfyi</span>=<span class="hl-val">"compare"</span> <span class="hl-attr">data-slugs</span>=<span class="hl-val">"item-a,item-b"</span><span class="hl-tag">&gt;&lt;/div&gt;</span><br>
+<span class="hl-tag">&lt;div</span> <span class="hl-attr">data-chemfyi</span>=<span class="hl-val">"search"</span> <span class="hl-attr">data-placeholder</span>=<span class="hl-val">"Search Elements..."</span><span class="hl-tag">&gt;&lt;/div&gt;</span><br><br>
+<span class="hl-comment">&lt;!-- Step 2: Load the embed script once, anywhere --&gt;</span><br>
+<span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span>
+          </div>
+        </div>
+        <div class="mt-6 grid sm:grid-cols-3 gap-3 text-sm">
+          <div class="flex items-start gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl"><div><div class="font-semibold text-slate-900 dark:text-white text-xs">Shadow DOM Isolation</div><div class="text-slate-500 dark:text-slate-400 text-[10px]">No CSS conflicts with your site.</div></div></div>
+          <div class="flex items-start gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl"><div><div class="font-semibold text-slate-900 dark:text-white text-xs">Zero Dependencies</div><div class="text-slate-500 dark:text-slate-400 text-[10px]">No jQuery, React. Tree-shaken per site.</div></div></div>
+          <div class="flex items-start gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl"><div><div class="font-semibold text-slate-900 dark:text-white text-xs">Live Science Data</div><div class="text-slate-500 dark:text-slate-400 text-[10px]">From ChemFYI's curated database.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDGET GALLERY -->
+  <section id="widgets" class="py-16 sm:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6" x-data="{ activeWidget: 'entity' }">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">Widget Types &times; 2 Styles &times; 3 Themes</h2>
+        <p class="text-slate-600 dark:text-slate-400 mb-6">Select a widget type to preview. Every widget includes Shadow DOM isolation and a "Powered by ChemFYI" backlink.</p>
+      </div>
+
+      <!-- Widget type selector -->
+      <div class="flex flex-wrap gap-2 justify-center mb-8">
+        <template x-for="w in ['entity','compare','glossary','guide','search']">
+          <button @click="activeWidget = w" :class="activeWidget === w ? 'active' : ''" class="ws-btn" x-text="w"></button>
+        </template>
+      </div>
+
+      <!-- Widget preview area -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <div class="text-center mb-2"><span class="text-xs font-medium px-3 py-1 rounded-full inline-block" style="background: color-mix(in srgb, #059669 10%, white); color: #059669">Modern</span></div>
+          <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-6 bg-white dark:bg-slate-900 min-h-[200px] flex items-center justify-center">
+            <p class="text-sm text-slate-400">Widget preview loads from live API</p>
+          </div>
+        </div>
+        <div>
+          <div class="text-center mb-2"><span class="text-xs font-medium px-3 py-1 rounded-full inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Technical</span></div>
+          <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-6 bg-white dark:bg-slate-900 min-h-[200px] flex items-center justify-center">
+            <p class="text-sm text-slate-400">Widget preview loads from live API</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDGET OPTIONS -->
+  <section id="options" class="py-16 sm:py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">Widget Options</h2>
+        <p class="text-slate-600 dark:text-slate-400">Configure widgets with <code class="text-sm bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">data-*</code> attributes.</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b-2 border-slate-200 dark:border-slate-700">
+              <th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2 pr-4">Attribute</th>
+              <th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2 pr-4">Values</th>
+              <th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2 pr-4">Default</th>
+              <th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800 font-mono text-xs">
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-3 pr-4 font-medium text-slate-700 dark:text-slate-300">data-chemfyi</td><td class="py-3 pr-4 text-slate-500">entity, compare, glossary, guide, search, [tools]</td><td class="py-3 pr-4 text-slate-400">required</td><td class="py-3 text-slate-600 dark:text-slate-400">Widget type to render</td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-3 pr-4 font-medium text-slate-700 dark:text-slate-300">data-slug</td><td class="py-3 pr-4 text-slate-500">any slug</td><td class="py-3 pr-4 text-slate-400">&mdash;</td><td class="py-3 text-slate-600 dark:text-slate-400">Entity slug from the ChemFYI database</td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-3 pr-4 font-medium text-slate-700 dark:text-slate-300">data-theme</td><td class="py-3 pr-4 text-slate-500">light, dark, sepia, auto</td><td class="py-3 pr-4 text-slate-400">light</td><td class="py-3 text-slate-600 dark:text-slate-400">Visual theme (<code>auto</code> follows OS preference)</td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-3 pr-4 font-medium text-slate-700 dark:text-slate-300">data-style</td><td class="py-3 pr-4 text-slate-500">modern, technical</td><td class="py-3 pr-4 text-slate-400">modern</td><td class="py-3 text-slate-600 dark:text-slate-400">Widget design style</td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-3 pr-4 font-medium text-slate-700 dark:text-slate-300">data-size</td><td class="py-3 pr-4 text-slate-500">default, compact, large</td><td class="py-3 pr-4 text-slate-400">default</td><td class="py-3 text-slate-600 dark:text-slate-400">Widget size</td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-3 pr-4 font-medium text-slate-700 dark:text-slate-300">data-slugs</td><td class="py-3 pr-4 text-slate-500">slug-a,slug-b</td><td class="py-3 pr-4 text-slate-400">&mdash;</td><td class="py-3 text-slate-600 dark:text-slate-400">Comma-separated slugs for compare widget</td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-3 pr-4 font-medium text-slate-700 dark:text-slate-300">data-placeholder</td><td class="py-3 pr-4 text-slate-500">any string</td><td class="py-3 pr-4 text-slate-400">Search...</td><td class="py-3 text-slate-600 dark:text-slate-400">Search box placeholder text</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- STYLES & THEMES -->
+  <section id="styles" class="py-16 sm:py-20 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">Styles &amp; Themes</h2>
+        <p class="text-slate-600 dark:text-slate-400">2 design styles &times; 4 themes. Mix and match to fit your site.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-900">
+          <div class="font-bold text-slate-900 dark:text-white mb-1">modern</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Clean lines, rounded corners, accent gradients. Ideal for product pages and marketing sites. <strong>Default style.</strong></p>
+          <div class="code-block text-[11px]"><span class="hl-attr">data-style</span>=<span class="hl-val">"modern"</span></div>
+        </div>
+        <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-900">
+          <div class="font-bold text-slate-900 dark:text-white mb-1">technical</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Monospace typography, grid overlays, laboratory aesthetic. Ideal for scientific documentation and research papers.</p>
+          <div class="code-block text-[11px]"><span class="hl-attr">data-style</span>=<span class="hl-val">"technical"</span></div>
+        </div>
+        <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-900">
+          <div class="font-bold text-slate-900 dark:text-white mb-1">Light + Dark + Auto</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Set explicitly or use <code>auto</code> to follow the visitor's OS preference (prefers-color-scheme).</p>
+          <div class="code-block text-[11px]"><span class="hl-attr">data-theme</span>=<span class="hl-val">"auto"</span></div>
+        </div>
+        <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-900">
+          <div class="font-bold text-slate-900 dark:text-white mb-1">Sepia</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Warm paper-tone background. Perfect for science blogs, journal articles, and educational content.</p>
+          <div class="code-block text-[11px]"><span class="hl-attr">data-theme</span>=<span class="hl-val">"sepia"</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CDN OPTIONS -->
+  <section id="cdn" class="py-16 sm:py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">CDN Options</h2>
+        <p class="text-slate-600 dark:text-slate-400">Multiple delivery options to fit your workflow.</p>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-900">
+          <div class="flex items-center gap-2 mb-2"><h3 class="font-bold text-slate-900 dark:text-white text-sm">jsDelivr CDN</h3></div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Global CDN, auto-updates with npm. Recommended for most use cases.</p>
+          <div class="code-block-wrapper" x-data="{ copied: false }">
+            <div class="code-lang-badge">HTML</div>
+            <button @click="navigator.clipboard?.writeText($refs.cdn1.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="code-copy-btn" x-text="copied ? '&#10003;' : 'Copy'"></button>
+            <pre class="code-block text-xs" x-ref="cdn1"><span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></pre>
+          </div>
+        </div>
+        <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-900">
+          <div class="flex items-center gap-2 mb-2"><h3 class="font-bold text-slate-900 dark:text-white text-sm">npm Package</h3></div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">For Webpack, Vite, Rollup bundlers.</p>
+          <div class="code-block-wrapper" x-data="{ copied: false }">
+            <div class="code-lang-badge">Shell</div>
+            <button @click="navigator.clipboard?.writeText($refs.cdn2.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="code-copy-btn" x-text="copied ? '&#10003;' : 'Copy'"></button>
+            <pre class="code-block text-xs" x-ref="cdn2">npm install chemfyi-embed
+
+<span class="hl-comment">// In your JS/TS:</span>
+<span class="hl-kw">import</span> <span class="hl-str">'chemfyi-embed'</span>;</pre>
+          </div>
+        </div>
+        <div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-900">
+          <div class="flex items-center gap-2 mb-2"><h3 class="font-bold text-slate-900 dark:text-white text-sm">Pinned Version</h3></div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Lock to a specific version for production stability.</p>
+          <div class="code-block-wrapper" x-data="{ copied: false }">
+            <div class="code-lang-badge">HTML</div>
+            <button @click="navigator.clipboard?.writeText($refs.cdn3.textContent); copied = true; setTimeout(() => copied = false, 2000)" class="code-copy-btn" x-text="copied ? '&#10003;' : 'Copy'"></button>
+            <pre class="code-block text-xs" x-ref="cdn3"><span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/npm/chemfyi-embed@1.0.0/dist/embed.min.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCIENCE FYI FAMILY -->
+  <section id="network" class="py-12 sm:py-16 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">Science FYI Family</h2>
+        <p class="text-slate-600 dark:text-slate-400">Part of <a href="https://fyipedia.com" class="font-medium hover:underline" style="color:#059669" target="_blank" rel="noopener">FYIPedia</a> — open-source developer tools for chemistry, geology, astronomy, and materials science. Hub: <a href="https://labfyi.com" class="font-medium hover:underline" style="color:#059669" target="_blank" rel="noopener">labfyi.com</a>.</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead><tr class="border-b-2 border-slate-200 dark:border-slate-700"><th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2 pr-4">Site</th><th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2 pr-4">Domain</th><th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2 pr-4 hidden sm:table-cell">Focus</th><th class="text-left font-semibold text-slate-700 dark:text-slate-300 py-2">Package</th></tr></thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800" id="network-table">
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-2 pr-4 font-medium text-slate-900 dark:text-white">ChemFYI</td><td class="py-2 pr-4"><a href="https://chemfyi.com" class="hover:underline text-xs" style="color:#059669" target="_blank" rel="noopener">chemfyi.com</a></td><td class="py-2 pr-4 text-slate-600 dark:text-slate-400 text-xs hidden sm:table-cell">Periodic table, elements, compounds, reactions</td><td class="py-2"><a href="https://www.npmjs.com/package/chemfyi-embed" class="text-xs px-2 py-0.5 rounded text-white" style="background:#6b7280" target="_blank" rel="noopener">npm</a></td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-2 pr-4 font-medium text-slate-900 dark:text-white">AlloyFYI</td><td class="py-2 pr-4"><a href="https://alloyfyi.com" class="hover:underline text-xs" style="color:#059669" target="_blank" rel="noopener">alloyfyi.com</a></td><td class="py-2 pr-4 text-slate-600 dark:text-slate-400 text-xs hidden sm:table-cell">Metal alloys, compositions, properties, 6-axis ratings</td><td class="py-2"><a href="https://www.npmjs.com/package/alloyfyi-embed" class="text-xs px-2 py-0.5 rounded text-white" style="background:#6b7280" target="_blank" rel="noopener">npm</a></td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-2 pr-4 font-medium text-slate-900 dark:text-white">GemFYI</td><td class="py-2 pr-4"><a href="https://gemfyi.com" class="hover:underline text-xs" style="color:#059669" target="_blank" rel="noopener">gemfyi.com</a></td><td class="py-2 pr-4 text-slate-600 dark:text-slate-400 text-xs hidden sm:table-cell">Gemstones, Mohs hardness, optical properties, origins</td><td class="py-2"><a href="https://www.npmjs.com/package/gemfyi-embed" class="text-xs px-2 py-0.5 rounded text-white" style="background:#6b7280" target="_blank" rel="noopener">npm</a></td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-2 pr-4 font-medium text-slate-900 dark:text-white">StarFYI</td><td class="py-2 pr-4"><a href="https://starfyi.com" class="hover:underline text-xs" style="color:#059669" target="_blank" rel="noopener">starfyi.com</a></td><td class="py-2 pr-4 text-slate-600 dark:text-slate-400 text-xs hidden sm:table-cell">Stars, constellations, spectral classification, magnitudes</td><td class="py-2"><a href="https://www.npmjs.com/package/starfyi-embed" class="text-xs px-2 py-0.5 rounded text-white" style="background:#6b7280" target="_blank" rel="noopener">npm</a></td></tr>
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800"><td class="py-2 pr-4 font-medium text-slate-900 dark:text-white">MineralFYI</td><td class="py-2 pr-4"><a href="https://mineralfyi.com" class="hover:underline text-xs" style="color:#059669" target="_blank" rel="noopener">mineralfyi.com</a></td><td class="py-2 pr-4 text-slate-600 dark:text-slate-400 text-xs hidden sm:table-cell">6,215 minerals, crystal systems, Mohs hardness</td><td class="py-2"><a href="https://www.npmjs.com/package/mineralfyi-embed" class="text-xs px-2 py-0.5 rounded text-white" style="background:#6b7280" target="_blank" rel="noopener">npm</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Highlight current site row -->
+      <script>(function(){var s='ChemFYI';document.querySelectorAll('#network-table tr').forEach(function(r){var c=r.querySelector('td:first-child');if(c&&c.textContent.trim()===s){r.style.background='color-mix(in srgb, #059669 6%, white)';r.style.fontWeight='600';var npm=r.querySelector('a[href*="npmjs"]');if(npm)npm.style.background='#059669';}});})();</script>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 dark:bg-slate-950 text-slate-300 py-10 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid sm:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h4 class="font-bold text-white mb-2">ChemFYI Embed</h4>
+          <p class="text-xs text-slate-400 leading-relaxed mb-3">Elements widgets for any website. Part of <a href="https://fyipedia.com" class="hover:text-white" target="_blank" rel="noopener">FYIPedia</a>.</p>
+          <div class="flex gap-3 flex-wrap text-xs">
+            <a href="https://github.com/fyipedia/chemfyi-embed" target="_blank" rel="noopener" class="text-slate-400 hover:text-white">GitHub</a>
+            <a href="https://www.npmjs.com/package/chemfyi-embed" target="_blank" rel="noopener" class="text-slate-400 hover:text-white">npm</a>
+            <a href="https://chemfyi.com/developers/" target="_blank" rel="noopener" class="text-slate-400 hover:text-white">API Docs</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-2">Science FYI Sites</h4>
+          <div class="grid grid-cols-2 gap-0.5 text-xs">
+            <a href="https://chemfyi.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white py-0.5">ChemFYI</a>
+            <a href="https://alloyfyi.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white py-0.5">AlloyFYI</a>
+            <a href="https://gemfyi.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white py-0.5">GemFYI</a>
+            <a href="https://starfyi.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white py-0.5">StarFYI</a>
+            <a href="https://mineralfyi.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white py-0.5">MineralFYI</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-2">Quick Links</h4>
+          <ul class="space-y-1 text-xs">
+            <li><a href="https://chemfyi.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white">Visit ChemFYI</a></li>
+            <li><a href="https://chemfyi.com/developers/" target="_blank" rel="noopener" class="text-slate-400 hover:text-white">REST API Docs</a></li>
+            <li><a href="https://fyipedia.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white">FYIPedia Ecosystem</a></li>
+            <li><a href="https://labfyi.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-white">Science FYI Hub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-4 flex flex-col sm:flex-row justify-between gap-2 text-xs text-slate-500">
+        <span>&copy; <span x-text="new Date().getFullYear()"></span> FYIPedia. MIT License.</span>
+        <span>Built with care by <a href="https://fyipedia.com" class="hover:text-slate-300">fyipedia.com</a> &middot; <a href="https://chemfyi.com" class="hover:text-slate-300">chemfyi.com</a></span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "name": "chemfyi-embed",
+  "version": "1.0.0",
+  "description": "Embed ChemFYI chemistry widgets — element cards, formula renderer, phase badges. Zero dependencies, Shadow DOM, 4 themes.",
+  "main": "dist/embed.min.js",
+  "module": "dist/embed.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "chemistry",
+    "periodic-table",
+    "elements",
+    "compounds",
+    "formula",
+    "phase",
+    "embed",
+    "widget",
+    "chemfyi",
+    "chemfyi.com",
+    "shadow-dom",
+    "zero-dependencies",
+    "fyipedia",
+    "sciencefyi"
+  ],
+  "homepage": "https://widget.chemfyi.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fyipedia/chemfyi-embed"
+  },
+  "bugs": {
+    "url": "https://github.com/fyipedia/chemfyi-embed/issues"
+  },
+  "license": "MIT",
+  "author": "FYIPedia <dev@fyipedia.com>",
+  "publishConfig": {
+    "access": "public"
+  }
+}
