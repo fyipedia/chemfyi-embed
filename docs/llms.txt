@@ -1,0 +1,27 @@
+# ChemFYI Embed Widget
+
+> Embeddable ChemFYI widgets for any website. Zero dependencies, Shadow DOM isolation, 4 themes (light/dark/sepia/auto).
+
+## Quick Start
+
+Add to any HTML page:
+- Script: <script src="https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"></script>
+
+## Links
+
+- Main site: https://chemfyi.com
+- Widget docs: https://widget.chemfyi.com
+- npm: https://www.npmjs.com/package/chemfyi-embed
+- GitHub: https://github.com/fyipedia/chemfyi-embed
+- API: https://chemfyi.com/developers/
+
+## Science FYI Widget Family
+
+- [AlloyFYI Widget](https://widget.alloyfyi.com)
+- [GemFYI Widget](https://widget.gemfyi.com)
+- [StarFYI Widget](https://widget.starfyi.com)
+- [MineralFYI Widget](https://widget.mineralfyi.com)
+
+## Part of FYIPedia
+
+Open-source developer tools ecosystem — https://fyipedia.com
