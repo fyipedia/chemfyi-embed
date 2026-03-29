@@ -1,21 +1,52 @@
 # ChemFYI Embed Widget
 
-> Embeddable ChemFYI widgets for any website. Zero dependencies, Shadow DOM isolation, 4 themes (light/dark/sepia/auto).
+> Periodic table, elements, compounds. Embeddable widgets for any website. Zero dependencies, Shadow DOM isolation.
 
 ## Quick Start
 
-Add to any HTML page:
-- Script: <script src="https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"></script>
+```html
+<script src="https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"></script>
+<div data-chemfyi="element-card" data-slug="example"></div>
+```
+
+## Available Widget Types (8)
+
+- entity: `data-chemfyi="entity"`
+- glossary: `data-chemfyi="glossary"`
+- guide: `data-chemfyi="guide"`
+- compare: `data-chemfyi="compare"`
+- search: `data-chemfyi="search"`
+- element-card (interactive): `data-chemfyi="element-card"`
+- formula-renderer (interactive): `data-chemfyi="formula-renderer"`
+- phase-badge (interactive): `data-chemfyi="phase-badge"`
+
+## Customization
+
+- **Themes**: light, dark, sepia, auto (follows system preference)
+- **Sizes**: compact (280px), default (420px), large (720px)
+- **Styles**: modern, classic
+
+```html
+<div data-chemfyi="element-card" data-slug="example"
+     data-theme="auto" data-size="compact" data-style-variant="modern"></div>
+```
+
+## Integration Methods
+
+1. **Script tag** (recommended): `<script src="https://cdn.jsdelivr.net/npm/chemfyi-embed@1/dist/embed.min.js"></script>`
+2. **iframe**: `https://chemfyi.com/iframe/entity/{slug}/`
+3. **oEmbed**: `https://chemfyi.com/oembed?url={page_url}&format=json`
+4. **Badge**: `https://chemfyi.com/badge/site.svg`
 
 ## Links
 
 - Main site: https://chemfyi.com
 - Widget docs: https://widget.chemfyi.com
-- npm: https://www.npmjs.com/package/chemfyi-embed
+- API documentation: https://chemfyi.com/developers/
+- npm package: https://www.npmjs.com/package/chemfyi-embed
 - GitHub: https://github.com/fyipedia/chemfyi-embed
-- API: https://chemfyi.com/developers/
 
-## Science FYI Widget Family
+## Science FYI Widget Network
 
 - [AlloyFYI Widget](https://widget.alloyfyi.com)
 - [GemFYI Widget](https://widget.gemfyi.com)
