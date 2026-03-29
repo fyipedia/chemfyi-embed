@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# ChemFYI Embed Widget
+# Main site: https://chemfyi.com
+# Widget docs: https://widget.chemfyi.com
+# npm: https://www.npmjs.com/package/chemfyi-embed
